@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug swiftodo",
+            "program": "${workspaceFolder:swiftodo}/.build/debug/swiftodo",
+            "args": [],
+            "cwd": "${workspaceFolder:swiftodo}",
+            "preLaunchTask": "swift: Build Debug swiftodo"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release swiftodo",
+            "program": "${workspaceFolder:swiftodo}/.build/release/swiftodo",
+            "args": [],
+            "cwd": "${workspaceFolder:swiftodo}",
+            "preLaunchTask": "swift: Build Release swiftodo"
+        }
+    ]
+}
