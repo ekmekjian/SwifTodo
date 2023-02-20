@@ -18,8 +18,8 @@ let package = Package(
         .executableTarget(
             name: "swiftodo",
             dependencies: ["SwiftTUI"
-            ],
-            linkerSettings: [.linkedLibrary("ncurses")]
+           ],
+            resources: [.process("Tasks.json")]
             ),
         .testTarget(
             name: "swiftodoTests",

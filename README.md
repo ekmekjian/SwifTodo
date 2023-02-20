@@ -13,8 +13,9 @@
 - [ ] keeps tracks of all Task.dueDate
 - [ ] Interpret dueDate property JSON
 #### Database Controller
-- [ ] Read from local JSON file
-    - [ ] Best way to store the Date data????
+- [X] Read from local JSON file
+    - [X] Best way to store the Date data????
+- [ ] Write to json file
 
 ---
 There are 86400 seconds in a day
@@ -27,31 +28,4 @@ We can hide elements and reveal if conditions are met:
 if counter > 1 {
     Button("Remove number") { counter -= 1 }
 }
-```
-## Example:
-```swift
-    @State var counter = 1
-     var body: some View {
-    VStack(alignment:.center){
-    Button("Add number") { counter += 1 }
-    if counter > 1 {
-        Button("Remove number") { counter -= 1 }
-    }
-    HStack{
-    VStack {
-        ForEach(1 ... counter, id: \.self) { i in
-            Text("Number \(i)")
-        }
-        .border()
-    }
-    .padding()
-    Spacer()
-    VStack{
-    ForEach(1 ... counter, id: \.self) { i in
-        Text("Number \(i)")
-    }.border()
-    }.padding()
-    }.padding()
-    }.padding()
-    }
 ```
