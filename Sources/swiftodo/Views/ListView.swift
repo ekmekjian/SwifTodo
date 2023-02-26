@@ -6,12 +6,12 @@
 //
 import SwiftTUI
 import Foundation
-struct ListView: View{
+struct ListView:  View{
     // TODO: pull from database
     @State var toDos: [Task] = Parse()
     var body: some View{
         VStack(alignment: .center, spacing: 1){
-        VStack(alignment: .center, spacing: 1){
+        VStack(){
                ForEach(toDos){ toDo in
                TaskView(toDo: toDo, onDelete: {toDos.removeAll(where: {$0.id == toDo.id})})
                } 
@@ -19,14 +19,18 @@ struct ListView: View{
         Spacer()
         addToDo
         }
-
-            
-}
-        private var addToDo: some View {
-            HStack {
+ }
+    private var addToDo: some View {
+                HStack {
                 Text("New to-do: ")
-                    TextField() { toDos.append(Task(title: $0)) }
+                TextField() {
+                    toDos.append(Task(title: $0))
+                    // After apending the task to the array add it to the database
+                    SaveData(from: toDos)
+                }
                 Spacer()
+            }
         }
-    }
 }
+
+

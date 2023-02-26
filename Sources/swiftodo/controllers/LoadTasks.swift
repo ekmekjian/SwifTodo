@@ -1,11 +1,13 @@
 import Foundation
 private func LoadContents() -> Data?{
-    let asset = "Tasks"
-    if let fileURL = Bundle.module.url(forResource: asset, withExtension: "json"){
-        if let contents = try? String(contentsOf: fileURL){
+    let path = "/Users/black/Documents/SwifTodo/Tasks.json"
+    let url = URL(filePath: path)
+    print(url)
+        if let contents = try? String(contentsOf: url){
+            print("do we load the contents")
             return Data(contents.utf8)
         }
-    }
+    
     return nil
 }
 
