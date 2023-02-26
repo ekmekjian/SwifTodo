@@ -1,23 +1,32 @@
 
 ## Design (CLI Implementation)
 ### Models
+- Task:
+- Json Codable Tasks:
 #### Task
-- [ ] Title
-- [ ] DudeDate
+- [X] Title
+- [ ] DueDate
 - [ ] Duration
 - [ ] Priortiy
+### Views:
+- [ ] ListView to create layout of the tasks:
+- [ ] TaskView, layout view for a task
 ### Controllers
-## View
-- [ ] Accepts JSON into Task 
+- [X] Accepts JSON into Task 
+- [ ] Completing tasks:
+    - [ ] When a task is compelted remove from the json
 #### Due Date Controller
 - [ ] keeps tracks of all Task.dueDate
 - [ ] Interpret dueDate property JSON
 #### Database Controller
 - [X] Read from local JSON file
     - [X] Best way to store the Date data????
-- [ ] Write to json file
-
+- [ ] Devlop data cycle?( I don't know how to say this):
+    - [ ] When a task is added save to the Database
+    - [ ] Check that a new task doesn't duplicate
+    - [ ] ? Create a new .json file each time???
 ---
+## Notes
 There are 86400 seconds in a day
  Whether it's HStack or VStack each take an alignment paramter `(alignment:.center){`:
  - .center(Center the elements)
