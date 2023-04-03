@@ -4,18 +4,18 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug swiftodo",
-            "program": "${workspaceFolder:swiftodo}/.build/debug/swiftodo",
+            "program": "${workspaceFolder:SwifTodo}/.build/debug/swiftodo",
             "args": [],
-            "cwd": "${workspaceFolder:swiftodo}",
+            "cwd": "${workspaceFolder:SwifTodo}",
             "preLaunchTask": "swift: Build Debug swiftodo"
         },
         {
             "type": "lldb",
             "request": "launch",
             "name": "Release swiftodo",
-            "program": "${workspaceFolder:swiftodo}/.build/release/swiftodo",
+            "program": "${workspaceFolder:SwifTodo}/.build/release/swiftodo",
             "args": [],
-            "cwd": "${workspaceFolder:swiftodo}",
+            "cwd": "${workspaceFolder:SwifTodo}",
             "preLaunchTask": "swift: Build Release swiftodo"
         }
     ]

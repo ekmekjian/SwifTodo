@@ -1,3 +1,3 @@
 import SwiftTUI
-Application(rootView: ContentView()).start()
-// print(Parse())
+// Application(rootView: ContentView()).start()
+print(Parse())

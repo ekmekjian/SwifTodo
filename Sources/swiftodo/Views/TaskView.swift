@@ -1,16 +1,15 @@
 import SwiftTUI
 import Foundation
 struct TaskView: View{
-    let toDo: Task
+    var toDo: Task
     let onDelete: () -> Void
     @State var deleting = false
-
     var body: some View{
         HStack{
             HStack{
                 Text(toDo.title)
                 VStack{
-                        //due 
+                Text("| Due: \(String(describing:toDo.dueDate))")
                         //duration
                     }
                 Spacer()

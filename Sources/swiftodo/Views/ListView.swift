@@ -10,27 +10,16 @@ struct ListView:  View{
     // TODO: pull from database
     @State var toDos: [Task] = Parse()
     var body: some View{
-        VStack(alignment: .center, spacing: 1){
-        VStack(){
+        HStack(alignment: .center, spacing: 1){
+        VStack(alignment: .leading){
                ForEach(toDos){ toDo in
                TaskView(toDo: toDo, onDelete: {toDos.removeAll(where: {$0.id == toDo.id})})
                } 
-            }
         Spacer()
-        addToDo
+        AddToDo(toDos: toDos)
+            }
         }
  }
-    private var addToDo: some View {
-                HStack {
-                Text("New to-do: ")
-                TextField() {
-                    toDos.append(Task(title: $0))
-                    // After apending the task to the array add it to the database
-                    SaveData(from: toDos)
-                }
-                Spacer()
-            }
-        }
 }
 
 

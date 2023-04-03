@@ -31,8 +31,7 @@
 - [ ] Interpret dueDate property JSON
 
 #### Database Controller
-
-- [ ] Check if the json file exists otherwise create it
+I want to pull an ISO8601 from the json and send it to the .dueDate instance of Task and be able to call the time and date inorder to display in View. 
 - [X] Delete a task and update the JSON
 - [X] Read from local JSON file
   - [X] Best way to store the Date data????
@@ -40,7 +39,9 @@
   - [X] When a task is added save to the Database
   - [ ] Check that a new task doesn't duplicate
   - [X] ? Create a new .json file each time???(No can now read and write)
-
+#### File Manager:
+- [ ] check if the file and directory exists if not create it else load contents
+- [ ] Either gain permissions to write to .config or find new destination for JSON file
 ---
 
 ## Notes

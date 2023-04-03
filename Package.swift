@@ -18,8 +18,8 @@ let package = Package(
         .executableTarget(
             name: "swiftodo",
             dependencies: ["SwiftTUI"
-           ],
-            resources: [.process("Tasks.json")]
+           ]
+            // resources: [.process("Tasks.json")]
             ),
         .testTarget(
             name: "swiftodoTests",
