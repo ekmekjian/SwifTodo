@@ -1,3 +1,5 @@
 import SwiftTUI
-// Application(rootView: ContentView()).start()
-print(Parse())
+import Foundation
+FileCheck()
+Application(rootView: ContentView()).start()
+// print(Parse())

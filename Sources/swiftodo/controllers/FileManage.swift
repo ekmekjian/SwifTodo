@@ -4,17 +4,17 @@ func SaveData(from tasks: [Task]){
     let fm = FileManager()
     let homeUrl = fm.homeDirectoryForCurrentUser
     let configFol = homeUrl.appendingPathComponent(".config/swiftodo")
-    let filePath = configFol.appendingPathComponent("Task.json").absoluteString
+    let filePath = configFol.appendingPathComponent("Task.json")
     let encoder = JSONEncoder()
     var saveTasks: [JTask] = []
     //check if the directory exists
     FileCheck()
     for task in tasks {
-        saveTasks.append(JTask(task.title, task.id))
+        saveTasks.append(JTask(task.title, task.id,task.dueDate))
     }
     encoder.outputFormatting = .prettyPrinted
     if let encoded = try? encoder.encode(saveTasks){
-        let url = URL(filePath: filePath)
+        let url = filePath
         do{
             try encoded.write(to: url)
         } catch{
@@ -31,13 +31,14 @@ private func LoadContents() -> Data?{
     let filePath = dirPath.appendingPathComponent("Task.json")
     print("load url")
     print(filePath)
-    FileCheck()
-        if let contents = try? String(contentsOf: filePath){
-            print("do we load the contents")
-            print(contents)
-            return Data(contents.utf8)
-        }
     
+    do{
+        let data = try Data(contentsOf: filePath)
+        print("This is what the Data returns: \(data)")
+        return data
+        }catch{
+            print("Failed to load data \(error.localizedDescription)")
+        }
     return nil
 }
 
@@ -46,8 +47,7 @@ func Parse()->[Task] {
     let decoder = JSONDecoder()
     if let data = LoadContents(){
     do{
-        let jtasks = try decoder.decode([JTask].self, from: data)
-        for task in jtasks{
+        for task in try decoder.decode([JTask].self, from: data){
             tasks.append(Task(title: task.title,id: task.id, dueDate: task.dueDate))
             }
             
@@ -67,7 +67,7 @@ func FileCheck(){
     var isDir: ObjCBool = false
     let homeUrl = fm.homeDirectoryForCurrentUser
     let configFol = homeUrl.appendingPathComponent(".config/swiftodo")
-    let filePath = configFol.appendingPathComponent("Task.json")
+    let filePath = configFol.appendingPathComponent("Task.json").absoluteString
     //check if configFolder exists
     if(!fm.fileExists(atPath: configFol.absoluteString, isDirectory: &isDir) || !isDir.boolValue){
         do{
