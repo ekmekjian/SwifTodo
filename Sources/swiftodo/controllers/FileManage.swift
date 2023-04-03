@@ -29,9 +29,7 @@ private func LoadContents() -> Data?{
     let homeUrl = fm.homeDirectoryForCurrentUser
     let dirPath = homeUrl.appendingPathComponent(".config/swiftodo")
     let filePath = dirPath.appendingPathComponent("Task.json")
-    print("load url")
-    print(filePath)
-    
+    FileCheck()
     do{
         let data = try Data(contentsOf: filePath)
         print("This is what the Data returns: \(data)")
@@ -55,7 +53,6 @@ func Parse()->[Task] {
              print(JsonHandler.invalidData(message: "Invalid Content!"))
             }
     }
-    print("but we do return")
     return tasks
 }
 enum JsonHandler: Error{
@@ -63,20 +60,38 @@ enum JsonHandler: Error{
     }
 
 func FileCheck(){
+    print("FileCheck")
     let fm = FileManager()
     var isDir: ObjCBool = false
     let homeUrl = fm.homeDirectoryForCurrentUser
-    let configFol = homeUrl.appendingPathComponent(".config/swiftodo")
-    let filePath = configFol.appendingPathComponent("Task.json").absoluteString
+    let configFol = homeUrl.appendingPathComponent(".config")
+    let swiftodo = configFol.appendingPathComponent("swiftodo")
+    let filePath = swiftodo.appendingPathComponent("Task.json").path
     //check if configFolder exists
-    if(!fm.fileExists(atPath: configFol.absoluteString, isDirectory: &isDir) || !isDir.boolValue){
-        do{
-            try fm.createDirectory(atPath: configFol.absoluteString, withIntermediateDirectories: true, attributes: nil)
-            fm.createFile(atPath: filePath, contents: nil)
-        } catch{
-            print("Failed to create directory \(error.localizedDescription)")
+    if (fm.fileExists(atPath: configFol.path, isDirectory: &isDir) && isDir.boolValue){
+        if isDir.boolValue{
+            //check if swiftodo exists
+            if fm.fileExists(atPath: swiftodo.path, isDirectory: &isDir){
+                if isDir.boolValue{
+                    //check if Task.json exists
+                    if fm.fileExists(atPath: filePath, isDirectory: &isDir){
+                        if !isDir.boolValue{
+                        }
+                    }else{
+                        //create Task.json
+                        fm.createFile(atPath: filePath, contents: nil, attributes: nil)
+                    }
+                }
+            }else{
+                //create swiftodo
+                do{
+                    try fm.createDirectory(at: swiftodo, withIntermediateDirectories: true, attributes: nil)
+                    fm.createFile(atPath: filePath, contents: nil, attributes: nil)
+                }catch{
+                    print("Failed to create swiftodo directory")
+                }
+            }
         }
-    }
-    if(!fm.fileExists(atPath: filePath)){fm.createFile(atPath: filePath, contents: nil)}
+}
 }
 //this is a test of comments
