@@ -7,10 +7,11 @@ func SaveData(from tasks: [Task]){
     let filePath = configFol.appendingPathComponent("Task.json")
     let encoder = JSONEncoder()
     var saveTasks: [JTask] = []
+    let dateParser = DateParser()
     //check if the directory exists
     FileCheck()
     for task in tasks {
-        saveTasks.append(JTask(task.title, task.id,task.dueDate))
+        saveTasks.append(JTask(task.title, task.id,dateParser.isoTostring(date: task.date, time: task.time)))
     }
     encoder.outputFormatting = .prettyPrinted
     if let encoded = try? encoder.encode(saveTasks){
@@ -43,11 +44,13 @@ private func LoadContents() -> Data?{
 func Parse()->[Task] {
     var tasks = [Task]()
     let decoder = JSONDecoder()
+    var dateParser = DateParser()
     if let data = LoadContents(){
     do{
         for task in try decoder.decode([JTask].self, from: data){
-            tasks.append(Task(title: task.title,id: task.id, dueDate: task.dueDate))
+            tasks.append(Task(title: task.title,id: task.id, date:dateParser.parseDate(taskDate: task.dueDate), time: dateParser.parseTime(taskDate: task.dueDate)))
             }
+            
             
         } catch{
              print(JsonHandler.invalidData(message: "Invalid Content!"))
@@ -60,7 +63,6 @@ enum JsonHandler: Error{
     }
 
 func FileCheck(){
-    print("FileCheck")
     let fm = FileManager()
     var isDir: ObjCBool = false
     let homeUrl = fm.homeDirectoryForCurrentUser

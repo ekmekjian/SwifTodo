@@ -9,7 +9,7 @@ struct TaskView: View{
             HStack{
                 Text(toDo.title)
                 VStack{
-                Text("| Due: \(String(describing:toDo.dueDate))")
+                Text("| Due: \(String(describing:toDo.date+" "+toDo.time))")
                         //duration
                     }
                 Spacer()

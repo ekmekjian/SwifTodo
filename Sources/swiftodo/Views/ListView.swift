@@ -11,6 +11,7 @@ struct ListView:  View{
     @State var toDos: [Task] = Parse()
     @State var title = ""
     @State var date = ""
+    @State var time = ""
     var body: some View{
         HStack(alignment: .center, spacing: 1){
         VStack(alignment: .leading){
@@ -35,12 +36,14 @@ struct ListView:  View{
     Text("Due Date: ")
     TextField() {
         date = $0
-            }
         }
-        }
+    Text("Time: ")
+    TextField() {
+        time = $0 
+    }
     Spacer()
     Button("Save", action: {
-        toDos.append(Task(title: title, dueDate: date))
+        toDos.append(Task(title: title, date: date, time: time.trimmingCharacters(in: .whitespacesAndNewlines)))
         SaveData(from: toDos)
     })
     
@@ -49,5 +52,6 @@ struct ListView:  View{
 
     }
  }
-
+}
+}
 

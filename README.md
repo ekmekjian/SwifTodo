@@ -25,6 +25,9 @@
 #### Due Date Controller
 - I want to pull an ISO8601 from the json and send it to the .dueDate instance of Task and be able to call the time and date inorder to display in View. 
 - What ever Tasks recives should be a simple string to comply with the JSON format
+- Current issue is that I need to send both date and time to the Task model and to do that I need to take an iso8601 string parse it and send it to the new instance of the object Task:
+	- [ ] Create a function that takes an iso8601 string and returns a date and time string
+
 
 - [ ] keeps tracks of all Task.dueDate
 - [ ] Interpret dueDate property JSON
@@ -43,6 +46,7 @@
 #### File Manager:
 - [X] check if the file and directory exists if not create it else load contents
 - [X] Either gain permissions to write to .config or find new destination for JSON file
+
 ---
 
 ## Notes
